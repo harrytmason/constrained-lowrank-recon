@@ -1,0 +1,18 @@
+This folder contains an example application for the paper
+	Subspace-constrained approaches to low-rank fMRI acceleration
+	by Harry T. Mason, Karla L. Miller, Nadine N. Graedel, and Mark Chiew
+
+Please download the data from ORA, and place in the folder 'Datasets' (or edit the appropriate lines in 'load_prior_n_data.m' by doing ctrl-f for 'Datsets/' and changing ot to the appropriate folder string
+
+The example is found in testCLR (Constrained Low-Rank), and should be able to run without needing any set-up
+	The purpose of this function is to allow the user to follow the mathematics, and is not intended to represent an optimised reconstruction.
+The optimisation loops are in CLRoptm.m
+The spatial subproblem is solved in CLRxsub.m
+The temporal subproblem is solved in CLRtsub.m
+The overall cost function is in CLRcost.m
+
+CLRgenE.m generates the NUFFT structure, and uses M. Chiew's optim/transforms and J. Fessler's IRT toolbox https://web.eecs.umich.edu/~fessler/irt/irt/
+The subspacea.m function comes from Andrew Knyazev, Rico Argentati, and is accessed through the custom cssa.m function
+While not used here, the Colormaps folder contains a set of perpetually uniform colormaps, and is included to allow easy visualisation if required to all readers.
+
+The Colormaps, MC_utils, and irt folders will all need to be decompressed before use.
