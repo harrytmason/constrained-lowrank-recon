@@ -1,0 +1,23 @@
+*What is an MRI scan?*
+An MRI scan – which stands for magnetic resonance imaging – can take an image of the inside of your body. If you know what you’re doing (i.e. not wearing metal hairclips) then it’s actually super safe! I’ve been scanned a *lot* of times.
+
+*What is an fMRI scan?*
+An fMRI scan is made up of multiple consecutive MRI scans (it stands for functional MRI – don’t worry about it). fMRI scans exploit the fact that a change in blood oxygen levels will also change the signal in the area you are scanning, typically the brain. Changes in oxygen happen in response to tissue nearby using energy. This means we can work out which parts of the brain are more active during an fMRI scan – they are the parts that need more oxygen, and thus the part experiencing a change in signal!
+
+*What am I trying to do with fMRI scans?*
+If we can still create a good quality image using less scan data, then a given amount of scan data can create more images (in my field we call this acceleration, because we like to be confusing).
+We can use less data to create an image if we know something about the image structure (e.g. a typical image needs information for every pixel, but a paint-by-numbers image needs so little information a child can accurate copy it). Any knowledge we can include will help reduce the amount of scan data needed for each image.
+The more images per second we have, the more confidence in any conclusions we draw from the data.
+The reason it gives us more confidence is because there's a lot of other things happening in the brain at the same time. Being able to get more images a second helps us separate the useful signal (e.g. the change in blood oxygen) from other signals (e.g. the heart rate, which is roughly once a second). There's a chance it'll help us with some other things (e.g. allowing shorter scans, being better able to detect the main signal), but this is the most important thing.
+
+*How do we use less data to create each fMRI scan?* 
+One method already shown to be effective is a low-rank structure (shown in a method called “k-t FASTER” by Chiew et al, in 2015). A low-rank structure means that parts of the brain will require oxygen at roughly the same time during the scanning process. As such, the signal will be changing in those parts of the brain in the same way at the same time. This means that, in a similar way to paint-by-numbers uses only one number to describe a big area, we can use the same descriptor of signal change for multiple pixels!
+
+*That's what someone else did, what are you doing?*
+We can use a low-rank structure with other information! In the paper (yes, I’ve finally got there), we try combining the knowledge about low-rank constraint individually with three other pieces of knowledge. Sadly we can’t just add them all into one, and yes I did try.
+The first extra piece of information I tried was a low-resolution prior. This helped a little but didn’t work as well as the others and was also more complicated, so feel free to skip this bit. Basically, it used the fact that a low-resolution image is quite a good approximation of the full-detail image. This is due to the way the information is collected from the scanner. I’m going to whisper the word k-space then run away here.
+The second piece of information I used was simply a limit on how big I was willing to let the numbers get in my scan (Tikhonov constraints). The bigger the sum of all the numbers, the more unlikely it was that my scan was correct. This actually worked super well.
+The final piece of information I used was a limit on how much the image of the brain would change between scans (temporal smoothness). More changing = less likely. We ended up getting an image every 0.3 seconds (three tenths of a second), so there really wasn’t a lot that could change in that time. So far, this looks to be the most promising method.
+
+*Conclusion*
+So there we go. Using the low-rank method in combination with temporal smoothness (or Tikhonov) was the best way I found to create the most fMRI images a second, forming a total scan with an image every 0.3 seconds. 
