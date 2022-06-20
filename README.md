@@ -1,5 +1,6 @@
 # constrained-lowrank-recon
-Code related to a specific paper, which will be linked to if the paper is accepted.
+Code related to Subspace-constrained approaches to low-rank fMRI acceleration by Harry T. Mason, Nadine N. Graedel, Karla L. Miller, and Mark Chiew 
+https://www.sciencedirect.com/science/article/pii/S1053811921005127
 
 The test code folder contains the wrapped up code that has been edited slightly for easy execution and understanding.
 
